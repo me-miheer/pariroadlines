@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\billingController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,7 @@ Route::get('/billing/invoice-editor/{id}',[billingController::class,'invoiceEdit
 Route::post('/billing/save',[billingController::class,'Save'])->name('save-bill');
 
 Route::post('/billing/update',[billingController::class,'Update'])->name('update-bill');
+
+Route::get('/php/artisan',function(){
+    Artisan::call('migrate');
+});
