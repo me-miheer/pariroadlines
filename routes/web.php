@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    echo "we are working fine";
 });
 
 Route::get('/billing',[billingController::class,'index'])->name('billing');
