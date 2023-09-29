@@ -72,7 +72,7 @@
                                         <i class="bi bi-eye btn btn-dark"  onclick="location.href='{{route('invoice-editor',$invoice['id'])}}'"></i>
                                     </div>
                                     <div class="col-3" style="text-align: center">
-                                        <i class="bi bi-printer btn btn-warning"></i>
+                                        <i class="bi bi-printer btn btn-warning" onclick="location.href='{{route('invoice-share',$invoice['id'])}}'"></i>
                                     </div>
                                     <div class="col-3" style="text-align: center">
                                         <i class="bi bi-share btn btn-success"  onclick="sharemyinvoice('{{$invoice['id']}}','{{$invoice['billed_to']}}')"></i>

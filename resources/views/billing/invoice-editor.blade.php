@@ -98,7 +98,7 @@
                 </table>
             </div>
             <div class="col-6" style="display: flex; justify-content: center; align-items: center;">
-                <button class="btn btn-info" style=" font-size: 50px;"><i class="bi bi-printer"></i></button>
+                <button class="btn btn-info" style=" font-size: 50px;" onclick="location.href='{{route('invoice-share',$id)}}'"><i class="bi bi-printer"></i></button>
             </div>
        </div>
        <hr>

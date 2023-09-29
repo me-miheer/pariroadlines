@@ -109,7 +109,14 @@ class billingController extends Controller
     }
 
     public function InvoiceShared(Request $request){
-        echo "HI ".trim($request->id).". I am share invoice.";
+        $invoice = invoice::find($request->id);
+        if($invoice){
+            $invoice_data = $invoice->toarray();
+            $invoice_data['complex_data'] = json_decode($invoice['complex_data'], true);
+            return view('billing.bill')->with(['id'=>$request->id, 'data' => $invoice_data]);
+        }else{
+            return redirect()->route('billing');
+        }
     }
 
     public function Delete(Request $request){
