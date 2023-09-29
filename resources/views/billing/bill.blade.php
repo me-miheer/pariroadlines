@@ -1,6 +1,6 @@
 @extends('welcome')
 
-@push('title', 'PRL1 -')
+@push('title', 'Bills @')
 
 @php
     date_default_timezone_set("Asia/Calcutta");
