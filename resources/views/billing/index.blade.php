@@ -95,12 +95,15 @@
 
     <script>
         function sharemyinvoice(id,billed_to){
-            navigators.share({
-                title: "Invoice for - "+billed_to,
-                url: "{{url('invoice')}}/"+id
-            })
-            .then(() => console.log('Successful share! 🎉'))
-            .catch(err => console.error(err));
+            if (navigator.share) {
+                navigator.share({
+                    title: "Invoice for - "+billed_to,
+                    text: 'Check out web.dev.',
+                    url: "{{url('invoice')}}/"+id
+                })
+                    .then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error));
+            }
         }
     </script>
 @endsection
