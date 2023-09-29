@@ -98,11 +98,11 @@
             if (navigator.share) {
                 navigator.share({
                     title: "Invoice for - "+billed_to,
-                    text: 'Bill no. : '+id+", Bill URL : ",
+                    text: 'Bill no. : PRL'+id+", Bill URL : ",
                     url: "{{url('invoice')}}/"+id
                 })
-                    .then(() => console.log('Successful share'))
-                    .catch((error) => console.log('Error sharing', error));
+                    .then(() => console.log())
+                    .catch((error) => console.log());
             }
         }
     </script>

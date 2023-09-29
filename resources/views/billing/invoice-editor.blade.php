@@ -299,9 +299,7 @@
             xhttp.onload = function() {
                 setTimeout(() => {
                     $('#displayLoader').addClass('d-none');
-                    // document.getElementById('displayLoader').style.display = "none";
                 }, 200);
-                console.log(this.responseText);
             }
             xhttp.open("POST", "{{route('update-bill')}}");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
