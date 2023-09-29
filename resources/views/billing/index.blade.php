@@ -24,6 +24,17 @@
           </nav>
 
           <hr>
+          @if (Session::get('delete'))
+            @if (Session::get('delete'))
+            <div class="alert alert-success">
+                {{Session::get('message-deleted')}}
+            </div>
+            @else
+            <div class="alert alert-danger">
+                
+            </div>
+            @endif
+          @endif
 
           <ul class="m-0 p-0 mb-3 mt-2">
             @foreach ($data as $invoice)
@@ -57,11 +68,17 @@
                           <div class="collapse" id="collapseExample{{$i}}">
                             <div class="card card-body">
                                 <div class="row">
-                                    <div class="col-6" style="text-align: center">
+                                    <div class="col-3" style="text-align: center">
                                         <i class="bi bi-eye btn btn-dark"  onclick="location.href='{{route('invoice-editor',$invoice['id'])}}'"></i>
                                     </div>
-                                    <div class="col-6" style="text-align: center">
-                                        <i class="bi bi-trash btn btn-danger"></i>
+                                    <div class="col-3" style="text-align: center">
+                                        <i class="bi bi-printer btn btn-warning"></i>
+                                    </div>
+                                    <div class="col-3" style="text-align: center">
+                                        <i class="bi bi-share btn btn-success"  onclick="sharemyinvoice('{{$invoice['id']}}','{{$invoice['billed_to']}}')"></i>
+                                    </div>
+                                    <div class="col-3" style="text-align: center">
+                                        <i class="bi bi-trash btn btn-danger"   onclick="location.href='{{route('invoice-delete',$invoice['id'])}}'"></i>
                                     </div>
                                 </div>
                             </div>
@@ -75,4 +92,15 @@
             @endforeach
           </ul>
     </section>
+
+    <script>
+        function sharemyinvoice(id,billed_to){
+            navigators.share({
+                title: "Invoice for - "+billed_to,
+                url: "{{url('invoice')}}/"+id
+            })
+            .then(() => console.log('Successful share! 🎉'))
+            .catch(err => console.error(err));
+        }
+    </script>
 @endsection

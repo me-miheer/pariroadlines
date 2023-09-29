@@ -25,7 +25,13 @@ Route::get('/billing/new',[billingController::class,'newBill'])->name('new-bill'
 
 Route::get('/billing/invoice-editor/{id}',[billingController::class,'invoiceEditor'])->name('invoice-editor');
 
+Route::get('/billing/invoice-delete/{id}',[billingController::class,'invoiceDelete'])->name('invoice-delete');
+
+Route::get('/billing/invoice/{id}',[billingController::class,'InvoiceShared'])->name('invoice-share');
+
 Route::post('/billing/save',[billingController::class,'Save'])->name('save-bill');
+
+Route::post('/billing/delete',[billingController::class,'Delete'])->name('delete-bill');
 
 Route::post('/billing/update',[billingController::class,'Update'])->name('update-bill');
 

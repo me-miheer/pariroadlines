@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redis;
 
 class billingController extends Controller
 {
@@ -24,6 +25,16 @@ class billingController extends Controller
             $invoice_data = $invoice->toarray();
             $invoice_data['complex_data'] = json_decode($invoice['complex_data'], true);
             return view('billing.invoice-editor')->with(['id'=>$request->id, 'invoice_data' => $invoice_data]);
+        }else{
+            return redirect()->route('billing');
+        }
+    }
+
+    public function invoiceDelete(Request $request){
+        $invoice = invoice::find($request->id);
+        if($invoice){
+            $data = $invoice->makeHidden('complex_data')->toarray();
+            return view('billing.delete-bill')->with(['data' => $data]);
         }else{
             return redirect()->route('billing');
         }
@@ -95,5 +106,22 @@ class billingController extends Controller
         $invoice = invoice::create($requested_data);
         return redirect()->route('billing');
 
+    }
+
+    public function InvoiceShared(Request $request){
+        echo "HI ".trim($request->id).". I am share invoice.";
+    }
+
+    public function Delete(Request $request){
+        $invoice = invoice::find(trim($request->id));
+        if($invoice){
+            if($invoice->delete()){
+                return redirect()->route('billing')->with(['delete'=> true, 'message-deleted'=> "Invoice has been deleted successfully."]);
+            }else{
+                return redirect()->route('billing')->with(['delete'=> false, 'message-deleted'=> "Unable to delete invoice."]);
+            }
+        }else{
+            return redirect()->route('billing')->with(['delete'=> false, 'message-deleted'=> "Unable to delete invoice."]);
+        }
     }
 }
