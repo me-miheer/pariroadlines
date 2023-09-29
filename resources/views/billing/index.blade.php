@@ -98,7 +98,7 @@
             if (navigator.share) {
                 navigator.share({
                     title: "Invoice for - "+billed_to,
-                    text: 'Invoice link for - '+billed_to,
+                    text: 'Bill no. : '+id+", Bill URL : ",
                     url: "{{url('invoice')}}/"+id
                 })
                     .then(() => console.log('Successful share'))
