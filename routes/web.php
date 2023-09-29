@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    echo "we are working fine";
+    return redirect()->route('billing');
 });
 
 Route::get('/billing',[billingController::class,'index'])->name('billing');
