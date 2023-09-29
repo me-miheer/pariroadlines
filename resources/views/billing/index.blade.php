@@ -99,7 +99,7 @@
                 navigator.share({
                     title: "Invoice for - "+billed_to,
                     text: 'Bill no. : PRL'+id+", Bill URL : ",
-                    url: "{{url('invoice')}}/"+id
+                    url: "{{url('billing/invoice')}}/"+id
                 })
                     .then(() => console.log())
                     .catch((error) => console.log());
