@@ -294,7 +294,6 @@
     <script>
         function doSubmit(){
             $('#displayLoader').removeClass('d-none');
-            console.log($('form').serialize());
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                 setTimeout(() => {
