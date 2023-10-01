@@ -16,6 +16,7 @@
     <section class="container m-auto mt-4">
         <nav class="navbar bg-body-tertiary" style="background-color: tomato">
             <div class="container-fluid">
+                <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-list"></i></a>
               <a class="navbar-brand"><b>Pari road lines</b></a>
               <form class="d-flex" role="search">
                 <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-plus"></i></a>
@@ -69,7 +70,7 @@
                             <div class="card card-body">
                                 <div class="row">
                                     <div class="col-3" style="text-align: center">
-                                        <i class="bi bi-eye btn btn-dark"  onclick="location.href='{{route('invoice-editor',$invoice['id'])}}'"></i>
+                                        <i class="bi bi-box-arrow-up-right btn btn-dark"  onclick="location.href='{{route('invoice-editor',$invoice['id'])}}'"></i>
                                     </div>
                                     <div class="col-3" style="text-align: center">
                                         <i class="bi bi-printer btn btn-warning" onclick="location.href='{{route('invoice-share',$invoice['id'])}}'"></i>
