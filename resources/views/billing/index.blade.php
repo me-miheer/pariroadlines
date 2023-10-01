@@ -16,7 +16,7 @@
     <section class="container m-auto mt-4">
         <nav class="navbar bg-body-tertiary" style="background-color: tomato">
             <div class="container-fluid">
-                <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-list"></i></a>
+                <a class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-list"></i></a>
               <a class="navbar-brand"><b>Pari road lines</b></a>
               <form class="d-flex" role="search">
                 <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-plus"></i></a>
