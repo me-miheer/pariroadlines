@@ -12,15 +12,18 @@
     a{
         text-decoration: none
     }
+    .nav-list-hover:hover{
+        background-color: ghostwhite;
+    }
 </style>
     <section class="container m-auto mt-4">
         <nav class="navbar bg-body-tertiary" style="background-color: tomato">
             <div class="container-fluid">
-                <a class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-list"></i></a>
-              <a class="navbar-brand"><b>Pari road lines</b></a>
-              <form class="d-flex" role="search">
-                <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-plus"></i></a>
-              </form>
+              <a class="navbar-brand bg-primary text-light" style="padding: 0px 10px;"><b>Pari Road Lines</b></a>
+              <div class="d-flex">
+                <a href="{{route('new-bill')}}" class="btn text-light" style="background-color: tomato; font-size: 20px" type="submit"><i class="bi bi-plus"></i></a>&nbsp;&nbsp;&nbsp;
+                <a class="btn text-light" style="background-color: tomato; font-size: 20px" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><i class="bi bi-list"></i></a>
+              </div>
             </div>
           </nav>
 
@@ -93,6 +96,24 @@
             @endforeach
           </ul>
     </section>
+
+
+    {{-- Offcanvas  sidebar--}}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><b>Menu</b></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <hr>
+        <div class="offcanvas-body">
+          <div class="ul">
+            <li style="list-style: none;" class="m-3">
+                <a class="d-flex card border-2 p-2 nav-list-hover" href="{{route('profile')}}"><b style="font-size: 28px; cursor: pointer;" class="p-2"><i class="bi bi-people"></i> Profile</b></a>
+            </li>
+          </div>
+        </div>
+    </div>
+    {{-- Offcanvas  sidebar--}}
 
     <script>
         function sharemyinvoice(id,billed_to){

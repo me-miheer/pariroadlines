@@ -4,11 +4,7 @@
 
 @section('body')
 
-    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{{route('billing')}}"><i class="bi bi-arrow-left btn" style="background-color: tomato"></i></a>
-        </div>
-    </nav>
+    @include('billing.includes.navbar')
 
     <form class="container mt-4" action="{{route('save-bill')}}" method="POST">
         <h2><b>New Bill</b></h2>

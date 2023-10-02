@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\billingController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -19,22 +20,44 @@ Route::get('/', function () {
     return redirect()->route('billing');
 });
 
-Route::get('/billing',[billingController::class,'index'])->name('billing');
+//  Billing
 
-Route::get('/billing/new',[billingController::class,'newBill'])->name('new-bill');
+Route::group(['prefix' => 'billing'], function(){
 
-Route::get('/billing/invoice-editor/{id}',[billingController::class,'invoiceEditor'])->name('invoice-editor');
+    // Get Routes
+    
+    Route::get('/',[billingController::class,'index'])->name('billing');
+        
+    Route::get('new',[billingController::class,'newBill'])->name('new-bill');
+    
+    Route::get('invoice-editor/{id}',[billingController::class,'invoiceEditor'])->name('invoice-editor');
+    
+    Route::get('invoice-delete/{id}',[billingController::class,'invoiceDelete'])->name('invoice-delete');
+    
+    Route::get('invoice/{id}',[billingController::class,'InvoiceShared'])->name('invoice-share');
 
-Route::get('/billing/invoice-delete/{id}',[billingController::class,'invoiceDelete'])->name('invoice-delete');
+    // Post Routes
+    
+    Route::post('save',[billingController::class,'Save'])->name('save-bill');
+    
+    Route::post('delete',[billingController::class,'Delete'])->name('delete-bill');
+    
+    Route::post('update',[billingController::class,'Update'])->name('update-bill');
 
-Route::get('/billing/invoice/{id}',[billingController::class,'InvoiceShared'])->name('invoice-share');
+    // Profile Group
 
-Route::post('/billing/save',[billingController::class,'Save'])->name('save-bill');
+    Route::group(['prefix' => 'profile'], function(){
+        Route::get('/', [ProfileController::class,'index'])->name('profile');
 
-Route::post('/billing/delete',[billingController::class,'Delete'])->name('delete-bill');
+        Route::get('/new', [ProfileController::class,'Create'])->name('new-profile');
 
-Route::post('/billing/update',[billingController::class,'Update'])->name('update-bill');
+        Route::post('/save-profile', [ProfileController::class,'Save'])->name('save-profile');
+
+    });
+
+});
 
 Route::get('/php/artisan',function(){
+    Artisan::call('storage:link');
     Artisan::call('migrate');
 });

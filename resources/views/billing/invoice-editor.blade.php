@@ -50,11 +50,7 @@
           </div>&nbsp;&nbsp;Updating
     </div>
     <!-- As a link -->
-    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{{route('billing')}}"><i class="bi bi-arrow-left btn" style="background-color: tomato"></i></a>
-        </div>
-    </nav>
+    @include('billing.includes.navbar')
 
     <form action="javascript:void(0)" class="m-auto mt-4 ms-2 me-2 mb-2" style="font-size: 14px;" method="POST">
         @csrf
