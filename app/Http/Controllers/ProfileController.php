@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\default_profile;
 use App\Models\profiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -11,8 +12,20 @@ class ProfileController extends Controller
 {
     public function index(Request $request){
         $profiles = profiles::all();
+
         $data = $profiles->toArray();
-        return view('billing.profile')->with(['data' => $data]);
+
+        $defaultProfile = default_profile::find(1);
+        
+        $defaultProfilename = profiles::find($defaultProfile->toArray()['default']);
+        
+        if($defaultProfilename){
+            $defaultProfiledata = $defaultProfilename->toArray();
+        }else{
+            $defaultProfiledata = null;
+        }
+
+        return view('billing.profile')->with(['data' => $data, 'default' => $defaultProfiledata]);
     }
 
     public function Create(Request $request){
@@ -57,5 +70,34 @@ class ProfileController extends Controller
             return redirect()->route('profile')->with(['profile_created'=>false, 'profile_created_message'=>'Oops! somthing went wrong.']);
         }
         
+    }
+
+    public function Update(Request $request){
+
+        if(empty($request->form_action)){
+            return redirect()->route('profile')->with(['profile_created'=>false,'profile_created_message'=>'Action can\'t be done']);
+        }
+        
+        if(empty($request->action_id)){
+            return redirect()->route('profile')->with(['profile_created'=>false,'profile_created_message'=>'Action can\'t be done']);
+        }
+        
+        $profile = profiles::find($request->action_id);
+                
+        if($profile){
+            if($request->form_action == 'default'){
+                $defaultProfile = default_profile::find(1);
+                $defaultProfile->default = $profile->id;
+                $defaultProfile->save();
+                return redirect()->route('profile')->with(['profile_created'=>true,'profile_created_message'=>$profile->name.' is updated as default profile']);
+            }else{
+                $defaultProfile = profiles::find($request->action_id);
+                $defaultProfile->delete();
+                return redirect()->route('profile')->with(['profile_created'=>true,'profile_created_message'=>$profile->name.'\'s profile has been deleted successfully']);
+            }
+        }else{
+            return redirect()->route('profile')->with(['profile_created'=>false,'profile_created_message'=>'Action can\'t be done']);
+        }
+
     }
 }

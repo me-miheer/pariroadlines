@@ -16,7 +16,7 @@
 </style>
     @include('billing.includes.navbar')
 
-    @if (Session::get('profile_created'))
+    @if (Session::get('profile_created_message'))
         @if (Session::get('profile_created') == true)
             <div class="alert alert-success">
                 {{Session::get('profile_created_message')}}
@@ -31,21 +31,23 @@
     <div action="" class="p-0 m-0 container m-auto">
         <nav class="navbar mt-2">
             <div class="container-fluid">
-                <div class="d-flex">
-                    <select name="form-action" id="form-action" class="form-select" onchange="showapply(this)">
+                <form class="d-flex" action="{{route('update-profile')}}" method="POST">
+                    @csrf
+                    <select name="form_action" id="form-action" class="form-select" onchange="showapply(this)">
                         <option value=""> Please select any</option>
                         <option value="default">Default profile</option>
                         <option value="delete">Delete Profile</option>
                     </select>
                     &nbsp;&nbsp;
-                    <a class="btn btn-primary d-none addon-for-apply">Apply</a>
-                </div>
+                    <input type="hidden" id="action_id" name="action_id">
+                    <button type="submit" class="btn btn-primary d-none addon-for-apply">Apply</button>
+                </form>
                 <a href="{{route('new-profile')}}" class="btn text-light" style="background-color: tomato"><i class="bi bi-plus"></i></a>
             </div>
         </nav>
     
         <div class="conatiner m-3 alert alert-dark">
-            Default profile is <u><b>Pari Road Lines</b></u>
+            Default profile : <u><b>{{(!empty($default['name']))?$default['name']:'No default profile found'}}</b></u>
         </div>
 
         <ul>
@@ -54,8 +56,8 @@
                 <li class="select-list card p-3 mt-4">
                     <h3><b>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="" name="radio-stacked" id="flexCheckDefault">
-                        <label class="form-check-label p-0 m-0" for="flexCheckDefault">
+                        <input class="form-check-input" type="radio" value="" name="radio-stacked" id="" onclick="setIdForAction({{trim($item['id'])}})">
+                        <label class="form-check-label p-0 m-0" for="">
                           {{$item['name']}}
                         </label>
                     </div>
@@ -77,6 +79,10 @@
             }else{
                 $('.addon-for-apply').removeClass('d-none')
             }
+        }
+
+        function setIdForAction(id){
+            $('#action_id').val(id);
         }
     </script>
 @endsection

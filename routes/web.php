@@ -53,6 +53,8 @@ Route::group(['prefix' => 'billing'], function(){
 
         Route::post('/save-profile', [ProfileController::class,'Save'])->name('save-profile');
 
+        Route::post('/update-profile', [ProfileController::class,'Update'])->name('update-profile');
+
     });
 
 });
