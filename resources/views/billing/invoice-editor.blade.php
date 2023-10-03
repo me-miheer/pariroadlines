@@ -351,7 +351,7 @@
                 if(wordData =='overflow'){
                     $('#amount_in_words').val('')
                 }else{
-                    $('#amount_in_words').val(wordData+" rupees only")
+                    $('#amount_in_words').val(wordData+"rupees only")
                 }
             }
         }
