@@ -215,14 +215,14 @@
                     <td class="p-0 m-0">
                         <div class="input-group input-group-shadow">
                             <span class="input-group-text" id="basic-addon1"><strong>AMOUNT IN WORDS :</strong></span>
-                            <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder="" value="{{$invoice_data['amount_in_words']}}" name="amount_in_words" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder="" value="{{$invoice_data['amount_in_words']}}" name="amount_in_words" id="amount_in_words" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                     </td>
                     <td style="font-weight: 600">
                         NET PAYABLE AMOUNT
                     </td>
                     <td style="font-weight: 600">
-                        <input type="text" onfocusout="doSubmit()"   class="form-control m-0 p-0"  value="{{$invoice_data['net_payble_amount']}}" name="net_payble_amount" style="min-width:79px" placeholder="">
+                        <input type="text" onfocusout="doSubmit()" onkeyup="toWords(this.value)" onkeydown="toWords(this.value)" class="form-control m-0 p-0"  value="{{$invoice_data['net_payble_amount']}}" name="net_payble_amount" style="min-width:79px" placeholder="">
                     </td>
                 </tr>
                 <tr>
@@ -328,6 +328,32 @@
 
         function resizeTextArea(input){
             input.style.height = "";input.style.height = input.scrollHeight + "px"
+        }
+
+        var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+        var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+
+        function inWords (num) {
+            if ((num = num.toString()).length > 9) return 'overflow';
+            n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+            if (!n) return; var str = '';
+            str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+            str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+            str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+            str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+            str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'rupees only' : '';
+            return str;
+        }
+
+        function toWords(val){
+            if(val.trim() != null){
+                let wordData = inWords(val);
+                if(wordData =='overflow'){
+                    $('#amount_in_words').val('')
+                }else{
+                    $('#amount_in_words').val(wordData.toUpperCase())
+                }
+            }
         }
     </script>
 @endsection
