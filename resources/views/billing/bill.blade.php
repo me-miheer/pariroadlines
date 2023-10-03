@@ -3,18 +3,61 @@
 @push('title', 'Bills @')
 
 @php
+    $account_name = ($isDefault)?$defaultData['name']:'';
+    $account_number = ($isDefault)?$defaultData['account_number']:'';
+    $ifsc_code = ($isDefault)?$defaultData['ifsc_code']:'';
+    $bank_name = ($isDefault)?$defaultData['bank_name']:'';
+    $pancard_number = ($isDefault)?$defaultData['pancard_number']:'';
+    $address = ($isDefault)?$defaultData['address']:'';
+    $mobile1 = ($isDefault)?$defaultData['mobile1']:'';
+    $mobile2 = ($isDefault)?$defaultData['mobile2']:'';
+    $gst = ($isDefault)?$defaultData['gst']:'';
+    $logo = ($isDefault)?$defaultData['logo']:'';
+    $signature = ($isDefault)?$defaultData['signature']:'';
+    $email = ($isDefault)?$defaultData['email']:'';
+@endphp
+
+@php
     date_default_timezone_set("Asia/Calcutta");
 @endphp
 
 @section('body')
-    <div class="bill container pb-5 bg-light" style="min-width: 1042px;">
+    <div class="bill container pb-5 bg-light mt-3" style="min-width: 1042px;">
+        {{-- Header --}}
+        <section class="header m-0 p-0">
+            <div class="row m-0 p-0 mb-5">
+                <div class="col-3-p-0 m-0"><img src="{{asset('storage/logo/'.$logo)}}" class="p-0 m-0" alt="logo" style="width: 70px; height: 70px; margin-bottom: -30px !important;"></div>
+                <div class="col-3-p-0 m-0 text-center" style="margin-top: -50px !important;"><h3><b>TAX INVOICE</b></h3></div>
+                <div class="col-3-p-0 m-0"></div>
+            </div>
+            <div class="row m-0 p-0">
+                <div class="col-6 m-0 p-0">
+                    <h3><b>PARI ROAD LINES</b></h3>
+                </div>
+                <div class="col-6 m-0 p-0" style="text-align: right">
+                    <b>Mobile no. :</b> 0000000000 <br> 0000000000
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                E-65 To 67 Panki Site 5, Udyogkunj kanpur
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-6 m-0 p-0">
+                    contact.pariroadlines@gmail.com
+                </div>
+                <div class="col-6 m-0 p-0" style="text-align: right">
+                    <b>GSTIN : </b>09BGIPP7119J1ZW
+                </div>
+            </div>
+        </section>
+        <hr>
         {{-- row 1 --}}
         <div class="row m-0 p-0">
             <div class="col-6 p-0 m-0" style="text-align: left">
-                <b>BILL INVOICE NUMBER : </b>@php $yearHeader = ( date('m') > 6) ? date('Y') + 1 : date('Y'); echo substr(($yearHeader-1), -2); echo '-'; echo substr($yearHeader, -2); @endphp/PRL{{$data['id']}}
+                <b>BILL INVOICE NUMBER : </b>@php $yearHeader = ( date('m') > 6) ? date('Y') + 1 : date('Y'); echo substr(($yearHeader-1), -2); echo '/'; echo substr($yearHeader, -2); @endphp/PRL{{$data['id']}}
             </div>
             <div class="col-6 p-0 m-0" style="text-align: right">
-                <b>Date :</b> {{date('d/m/Y h:i A', strtotime($data['updated_at']))}}
+                <b>Date :</b> {{date('d/m/Y h:i A')}}
             </div>
         </div>
 
@@ -133,27 +176,32 @@
                     <td class="p-4">
                         <div class="btn-group m-0 p-0" role="group" aria-label="Basic example">
                             <button type="button" class="btn m-0 p-0"><b>ACCOUNT NAME :</b></button>
-                            <button type="button" class="btn m-0 p-0">{{$data['account_name']}}</button>
+                            <button type="button" class="btn m-0 p-0">{{(!empty($data['account_name']))?$data['account_name']:$account_name}}</button>
                         </div>
                         <div class="btn-group m-0 p-0" role="group" aria-label="Basic example">
                             <button type="button" class="btn m-0 p-0"><b>ACCOUNT NUMBER :</b></button>
-                            <button type="button" class="btn m-0 p-0">{{$data['account_number']}}</button>
+                            <button type="button" class="btn m-0 p-0">{{(!empty($data['account_number']))?$data['account_number']:$account_number}}</button>
                         </div><br>
                         <div class="btn-group m-0 p-0" role="group" aria-label="Basic example">
                             <button type="button" class="btn m-0 p-0"><b>IFSC CODE :</b></button>
-                            <button type="button" class="btn m-0 p-0">{{$data['ifsc_code']}}</button>
+                            <button type="button" class="btn m-0 p-0">{{(!empty($data['ifsc_code']))?$data['ifsc_code']:$ifsc_code}}</button>
                         </div><br>
                         <div class="btn-group m-0 p-0" role="group" aria-label="Basic example">
                             <button type="button" class="btn m-0 p-0"><b>BANK NAME :</b></button>
-                            <button type="button" class="btn m-0 p-0">{{$data['bank_name']}}</button>
+                            <button type="button" class="btn m-0 p-0">{{(!empty($data['bank_name']))?$data['bank_name']:$bank_name}}</button>
                         </div><br>
                         <div class="btn-group m-0 p-0" role="group" aria-label="Basic example">
                             <button type="button" class="btn m-0 p-0"><b>PANCARD NUMBER :</b></button>
-                            <button type="button" class="btn m-0 p-0">{{$data['pancard_number']}}</button>
+                            <button type="button" class="btn m-0 p-0">{{(!empty($data['pancard_number']))?$data['pancard_number']:$pancard_number}}</button>
                         </div>
                     </td>
-                    <th class="p-4" style=" opacity: 0.5;">
-                        AUTHORIZED SIGNATORY
+                    <th class="p-4">
+                        <p class="m-0 p-0" style="font-size: 12px; opacity: 0.3;">
+                            AUTHORIZED SIGNATORY
+                        </p>
+                        <div class="for" style="position: relative; top: 0; bottom: 0; left: 0; right: 0; z-index: 2 !important; font-size: 12px;">
+                            for , PARI ROAD LINES <br> <img src="{{asset('storage/signature/'.$signature)}}" alt="sign" style="height: 80px; width: 200px;">
+                        </div>
                     </th>
                 </tr>
             </table>

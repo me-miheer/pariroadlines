@@ -3,6 +3,14 @@
 @push('title','Invoice Editor -')
 
 @php
+    $account_name = ($isDefault)?$defaultData['name']:'';
+    $account_number = ($isDefault)?$defaultData['account_number']:'';
+    $ifsc_code = ($isDefault)?$defaultData['ifsc_code']:'';
+    $bank_name = ($isDefault)?$defaultData['bank_name']:'';
+    $pancard_number = ($isDefault)?$defaultData['pancard_number']:'';
+@endphp
+
+@php
     date_default_timezone_set("Asia/Calcutta");
 @endphp
 
@@ -60,7 +68,7 @@
             <strong>BILL INVOICE NUMBER : </strong>@php $yearHeader = ( date('m') > 6) ? date('Y') + 1 : date('Y'); echo substr(($yearHeader-1), -2); echo '-'; echo substr($yearHeader, -2); @endphp/PRL{{$invoice_data['id']}}
         </div>
         <div class="col-4" style="text-align: right;">
-            <strong>Date :</strong>{{date('d/m/Y h:i A', strtotime($invoice_data['updated_at']))}}
+            <strong>Date :</strong>{{date('d/m/Y h:i A')}}
         </div>
        </div>
        <hr>
@@ -240,7 +248,7 @@
                             <th class="m-0 p-0">
                                 <div class="input-group input-group-shadow">
                                     <span class="input-group-text" id="basic-addon1"><strong>ACCOUNT NAME :</strong></span>
-                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{$invoice_data['account_name']}}" name="account_name" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{(!empty($invoice_data['account_name']))?$invoice_data['account_name']:$account_name}}" name="account_name" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </th>
                         </tr>
@@ -248,7 +256,7 @@
                             <th class="m-0 p-0">
                                 <div class="input-group input-group-shadow">
                                     <span class="input-group-text" id="basic-addon1"><strong>ACCOUNT NUMBER :</strong></span>
-                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{$invoice_data['account_number']}}" name="account_number" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{(!empty($invoice_data['account_number']))?$invoice_data['account_number']:$account_number}}" name="account_number" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </th>
                         </tr>
@@ -256,7 +264,7 @@
                             <th class="m-0 p-0">
                                 <div class="input-group input-group-shadow">
                                     <span class="input-group-text" id="basic-addon1"><strong>IFSC CODE :</strong></span>
-                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{$invoice_data['ifsc_code']}}" name="ifsc_code" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{(!empty($invoice_data['ifsc_code']))?$invoice_data['ifsc_code']:$ifsc_code}}" name="ifsc_code" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </th>
                         </tr>
@@ -264,7 +272,7 @@
                             <th class="m-0 p-0">
                                 <div class="input-group input-group-shadow">
                                     <span class="input-group-text" id="basic-addon1"><strong>BANK NAME :</strong></span>
-                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{$invoice_data['bank_name']}}" name="bank_name" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{(!empty($invoice_data['bank_name']))?$invoice_data['bank_name']:$bank_name}}" name="bank_name" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </th>
                         </tr>
@@ -272,7 +280,7 @@
                             <th class="m-0 p-0">
                                 <div class="input-group input-group-shadow">
                                     <span class="input-group-text" id="basic-addon1"><strong>PANCARD NUMBER :</strong></span>
-                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{$invoice_data['pancard_number']}}" name="pancard_number" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" onfocusout="doSubmit()"   class="form-control" placeholder=""   value="{{(!empty($invoice_data['pancard_number']))?$invoice_data['pancard_number']:$pancard_number}}" name="pancard_number" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </th>
                         </tr>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\default_profile;
 use App\Models\invoice;
+use App\Models\profiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis;
@@ -22,9 +24,22 @@ class billingController extends Controller
     public function invoiceEditor(Request $request){
         $invoice = invoice::find($request->id);
         if($invoice){
+
+            $defaultid = default_profile::find(1);
+
+            $defaultdetails = profiles::find($defaultid->default);
+
+            if($defaultdetails){
+                $defaultdetailsisdata = true;
+                $defaultdetailsdata = $defaultdetails->toArray(); 
+            }else{
+                $defaultdetailsisdata = false;
+                $defaultdetailsdata = null; 
+            }
+
             $invoice_data = $invoice->toarray();
             $invoice_data['complex_data'] = json_decode($invoice['complex_data'], true);
-            return view('billing.invoice-editor')->with(['id'=>$request->id, 'invoice_data' => $invoice_data]);
+            return view('billing.invoice-editor')->with(['id'=>$request->id, 'invoice_data' => $invoice_data,'isDefault'=>$defaultdetailsisdata,'defaultData'=>$defaultdetailsdata]);
         }else{
             return redirect()->route('billing');
         }
@@ -111,9 +126,22 @@ class billingController extends Controller
     public function InvoiceShared(Request $request){
         $invoice = invoice::find($request->id);
         if($invoice){
+
+            $defaultid = default_profile::find(1);
+
+            $defaultdetails = profiles::find($defaultid->default);
+
+            if($defaultdetails){
+                $defaultdetailsisdata = true;
+                $defaultdetailsdata = $defaultdetails->toArray(); 
+            }else{
+                $defaultdetailsisdata = false;
+                $defaultdetailsdata = null; 
+            }
+
             $invoice_data = $invoice->toarray();
             $invoice_data['complex_data'] = json_decode($invoice['complex_data'], true);
-            return view('billing.bill')->with(['id'=>$request->id, 'data' => $invoice_data]);
+            return view('billing.bill')->with(['id'=>$request->id, 'data' => $invoice_data,'isDefault'=>$defaultdetailsisdata,'defaultData'=>$defaultdetailsdata]);
         }else{
             return redirect()->route('billing');
         }
