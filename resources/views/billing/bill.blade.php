@@ -22,7 +22,7 @@
 @endphp
 
 @section('body')
-    <div class="bill container pb-5 bg-light mt-3" style="min-width: 1042px;">
+    <div class="bill container pb-5 bg-light mt-4" style="min-width: 1042px;">
         {{-- Header --}}
         <section class="header m-0 p-0">
             <div class="row m-0 p-0 mb-5">
