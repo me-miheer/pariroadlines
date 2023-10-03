@@ -3,18 +3,18 @@
 @push('title', 'Bills @')
 
 @php
-    $account_name = ($isDefault)?$defaultData['name']:'';
+    $account_name = ($isDefault)?$defaultData['name']:'__name__';
     $account_number = ($isDefault)?$defaultData['account_number']:'';
     $ifsc_code = ($isDefault)?$defaultData['ifsc_code']:'';
     $bank_name = ($isDefault)?$defaultData['bank_name']:'';
     $pancard_number = ($isDefault)?$defaultData['pancard_number']:'';
-    $address = ($isDefault)?$defaultData['address']:'';
-    $mobile1 = ($isDefault)?$defaultData['mobile1']:'';
-    $mobile2 = ($isDefault)?$defaultData['mobile2']:'';
-    $gst = ($isDefault)?$defaultData['gst']:'';
+    $address = ($isDefault)?$defaultData['address']:'__address__';
+    $mobile1 = ($isDefault)?$defaultData['mobile1']:'__mobile_no__';
+    $mobile2 = ($isDefault)?$defaultData['mobile2']:'__mobile_no__';
+    $gst = ($isDefault)?$defaultData['gst']:'__gstin__';
     $logo = ($isDefault)?$defaultData['logo']:'';
     $signature = ($isDefault)?$defaultData['signature']:'';
-    $email = ($isDefault)?$defaultData['email']:'';
+    $email = ($isDefault)?$defaultData['email']:'__email__';
 @endphp
 
 @php
@@ -32,21 +32,21 @@
             </div>
             <div class="row m-0 p-0">
                 <div class="col-6 m-0 p-0">
-                    <h3><b>PARI ROAD LINES</b></h3>
+                    <h3><b>{{$account_name}}</b></h3>
                 </div>
                 <div class="col-6 m-0 p-0" style="text-align: right">
-                    <b>Mobile no. :</b> 0000000000 <br> 0000000000
+                    <b>Mobile no. :</b> {{$mobile1}} <br> {{$mobile2}}
                 </div>
             </div>
             <div class="row p-0 m-0">
-                E-65 To 67 Panki Site 5, Udyogkunj kanpur
+                {{$address}}
             </div>
             <div class="row p-0 m-0">
                 <div class="col-6 m-0 p-0">
-                    contact.pariroadlines@gmail.com
+                    {{$email}}
                 </div>
                 <div class="col-6 m-0 p-0" style="text-align: right">
-                    <b>GSTIN : </b>09BGIPP7119J1ZW
+                    <b>GSTIN : </b>{{$gst}}
                 </div>
             </div>
         </section>
