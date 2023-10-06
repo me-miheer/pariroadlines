@@ -200,7 +200,7 @@
                             AUTHORIZED SIGNATORY
                         </p>
                         <div class="for" style="position: relative; top: 0; bottom: 0; left: 0; right: 0; z-index: 2 !important; font-size: 12px;">
-                            for , PARI ROAD LINES <br> <img src="{{asset('storage/signature/'.$signature)}}" alt="sign" style="height: 80px; width: 200px;">
+                            for , {{$account_name}} <br> <img src="{{asset('storage/signature/'.$signature)}}" alt="sign" style="height: 80px; width: 200px;">
                         </div>
                     </th>
                 </tr>
